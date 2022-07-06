@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sweetalert</title>
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <?php
 require 'config/conexion.php';
 
@@ -5,6 +14,10 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 	// Selected SERVICES
 
 	$selected_services = $_POST['selected_services'];
+
+ 
+
+    $selected_services_child = $_POST['selected_services_child'];
 
 
 	$servicio_complementario = $_POST['servicio_complementario'];
@@ -29,7 +42,7 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 	$client_phone_number = $_POST['client_phone_number'];
 	$client_email = $_POST['client_email'];
 
-
+	
 
 
 	$result = mysqli_query($conexion, "SELECT * FROM clients WHERE client_email='$client_email'")
@@ -65,7 +78,8 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 
 	$appointment_id = $data_appoinment['id'];
 
-	
+
+
 	foreach ($selected_services as $service) {
 
 		$query = mysqli_query($conexion, "INSERT INTO services_booked(appointment_id, service_id)
@@ -73,29 +87,25 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 			or die('error: ' . mysqli_error($conexion));
 	}
 
-//	echo "<div class = 'alert alert-success'>";
-//	echo "¡Excelente! Su cita ha sido creada con éxito.";
-//	echo "</div>";
-
-	//echo $servicio_complementario;
-
-	
-	if ($servicio_complementario == '11') {
-
-		$servicio_complementario = $servicio_complementario + 1 ;
-
-
-		echo '<script type="text/javascript">
-                
-			  window.location.assign("categorias_servicios_complementarios.php?id=' . $servicio_complementario . '&cliente='. $client_id . '&cita=' . $appointment_id .'");
-			  </script>';
-	}
-
-	if ($servicio_complementario != '11') {
-
-		echo '<script type="text/javascript">
-				  
-				window.location.assign("confirm_page.php?id=' . $appointment_id . '");
-				</script>';
-	}
 }
+
+
+?>
+  <script type="text/javascript">
+	swal({
+    title: "Deseas un Servicio Complementario?",
+    text: "Servicios Complementarios!",
+    icon: "info",
+    buttons: ["No lo Quiero", "Si lo Quiero"],
+    dangerMode: false,
+})
+.then((willDelete) => {
+    if (willDelete) {
+           window.location = "profesional_services_rand.php";
+    } else {
+        
+           window.location = "confirm_page_next.php";
+
+    }
+});
+</script>

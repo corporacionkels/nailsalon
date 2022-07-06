@@ -1,3 +1,10 @@
+<?php
+
+require 'config/conexion.php';
+
+  $query = mysqli_query($conexion, "DELETE FROM  tempory_appoinments")
+  or die('error: ' . mysqli_error($conexion));
+?>
 <!doctype html>
 <html>
 
@@ -136,7 +143,7 @@
                                 <p> Que Servicio Desea Agendar ? <span class=" ml-1 cursor-pointer"> Seleccione </span> </p>
                             </div>
                         </div>
-             <form id="form" name="login-form" method="POST" action="categorias_servicios.php">         
+             <form id="form" name="login-form" method="POST" action="select_services.php">         
                         <div class="radio-group row justify-content-between px-3 text-center a">
                             <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
                                 <div class="flex-row">
