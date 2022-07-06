@@ -4,6 +4,9 @@ require 'config/conexion.php';
 
   $query = mysqli_query($conexion, "DELETE FROM  tempory_appoinments")
   or die('error: ' . mysqli_error($conexion));
+
+  $query = mysqli_query($conexion, "DELETE FROM tempory_complementary")
+  or die('error: ' . mysqli_error($conexion));
 ?>
 <!doctype html>
 <html>

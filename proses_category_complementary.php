@@ -11,35 +11,18 @@
 
 require 'config/conexion.php';
 
-if (isset($_POST['selected_services_complementary']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-
-$query = mysqli_query($conexion, "DELETE FROM  tempory_appoinments")
-or die('error: ' . mysqli_error($conexion));
+if (isset($_POST['selected_services']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Selected SERVICES
 
 $selected_services = $_POST['selected_services'];
 
-$selected_services_complementary = $_POST['selected_services_complementary'];
+$query = mysqli_query($conexion, "UPDATE  tempory_appoinments SET complementary_id = '$selected_services'
+")
+or die('error : ' . mysqli_error($conexion));
 
-$query = mysqli_query($conexion, "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'nailsalon' AND TABLE_NAME = 'appointments'")
-or die('error: ' . mysqli_error($conexion));
-
-$data_appoinment = mysqli_fetch_assoc($query);
-
-$appointment_id = $data_appoinment['AUTO_INCREMENT'];
-
-//echo $appointment_id;
 //echo 'servicio selecccionado';
 //echo $selected_services;
-//echo 'Complementario seleccionado';
-//echo $selected_services_complementary;
-
-$query = mysqli_query($conexion, "INSERT INTO tempory_appoinments(appoinments_id,services_id,child_id)
-				VALUES('$appointment_id','$selected_services','$selected_services_complementary')")
-		or die('error: ' . mysqli_error($conexion));
-
-
 
 ?>
     <script type="text/javascript">
@@ -52,19 +35,22 @@ $query = mysqli_query($conexion, "INSERT INTO tempory_appoinments(appoinments_id
 })
 .then((willDelete) => {
     if (willDelete) {
-           window.location = "profesional_services_complementary_rand.php";
+           window.location = "profesional_services_rand_complementary.php";
     } else {
         
-           window.location = "profesional_services_complementary.php";
+           window.location = "profesional_services_only_complementary.php";
 
     }
 });
 </script>
+
+
 <?php
+
 
 }else{
 ?>	
-<script type="text/javascript">
+	<script type="text/javascript">
 	swal({
     title: "No has Seleccionado Ningun Servicio",
     text: "Agendar Servicios!",
@@ -83,6 +69,6 @@ $query = mysqli_query($conexion, "INSERT INTO tempory_appoinments(appoinments_id
 });
 	
 	</script>
-<?php
+<?php	
 }
 ?>

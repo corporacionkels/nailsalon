@@ -21,6 +21,27 @@
 
     $service_id = $data_appoinment['services_id'];
 
+    $complementary_id = $data_appoinment['complementary_id'];
+
+    $query = mysqli_query($conexion, "SELECT * from services_booked where service_id = '$complementary_id'")
+    or die('error: ' . mysqli_error($conexion));
+
+    $data_employed = mysqli_fetch_assoc($query);
+
+    $next_employed = $data_employed['employed_id'];
+
+   // echo $next_employed;
+
+    $query = mysqli_query($conexion, "SELECT * from employees where employee_id  = '$next_employed'")
+    or die('error: ' . mysqli_error($conexion));
+
+    $data_nextemployed = mysqli_fetch_assoc($query);
+
+    $name_employed = $data_nextemployed['first_name'].$data_nextemployed['last_name'];
+
+    //echo $name_employed;
+
+
 
 	?>
 	<!-- Appointment Page Stylesheet -->
@@ -218,8 +239,13 @@
 												<td class="col-md-1" style="text-align: center"></td>
 
 											</tr>
+                                            <th>Profesional para los Servicios Complementarios</th>
+                                            <tr>
+												<td class="col-md-9"><em><?php echo $row_profesional['start_day'] ?> Hora Inicio <?php echo $row_profesional['start_time'] ?> Hasta <?php echo $row_profesional['end_time_expected'] ?> Profesional: <?php echo $name_employed ?> </em></h4>
+												</td>
+												<td class="col-md-1" style="text-align: center"></td>
 
-
+											</tr>
 										
 										<?php
 										$stmt = $con->prepare("SELECT sum(service_price) as total
@@ -264,6 +290,16 @@
                                                 $lasumadora = $row['total'];
                                             }    
                                             ?>
+                                            <?php
+                                            $stmt = $con->prepare("SELECT sum(service_price) as total
+                                                        from services s
+                                                        where s.service_id ='$complementary_id'");
+                                            $stmt->execute();
+                                            $rows = $stmt->fetchAll();
+                                            foreach ($rows as $row) {
+                                                $lasumadoraloca = $row['total'];
+                                            }    
+                                            ?>
 											<p>
 												<?php
 												$stmt = $con->prepare("SELECT *
@@ -288,7 +324,7 @@
 												<h4><strong>Total: </strong></h4>
 											</td>
 											<td class="text-center text-danger">
-												<h4><strong>$<?php echo $lasuma+$lasumadora ?></strong></h4>
+												<h4><strong>$<?php echo $lasuma+$lasumadora+$lasumadoraloca ?></strong></h4>
 											</td>
 										</tr>
 

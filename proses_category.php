@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Sweetalert</title>
+<title>Cita || Espacio Teodora</title>
 </head>
 <body>
 
@@ -11,6 +11,7 @@
 
 require 'config/conexion.php';
 
+if (isset($_POST['selected_services']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Selected SERVICES
 
@@ -23,9 +24,9 @@ $data_appoinment = mysqli_fetch_assoc($query);
 
 $appointment_id = $data_appoinment['AUTO_INCREMENT'];
 
-echo $appointment_id;
-echo 'servicio selecccionado';
-echo $selected_services;
+//echo $appointment_id;
+//echo 'servicio selecccionado';
+//echo $selected_services;
 
 
 
@@ -81,4 +82,27 @@ if ($selected_services != '11') {
 <?php
 }
 
+}else{
+?>	
+	<script type="text/javascript">
+	swal({
+    title: "No has Seleccionado Ningun Servicio",
+    text: "Agendar Servicios!",
+    icon: "warning",
+    buttons: ["Deseas Salir?", "Deseas Seleccionarlo?"],
+    dangerMode: false,
+})
+.then((willDelete) => {
+    if (willDelete) {
+           window.location = "javascript:history.back()";
+    } else {
+        
+           window.location = "categorias.php";
+
+    }
+});
+	
+	</script>
+<?php	
+}
 ?>

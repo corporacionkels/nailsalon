@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Sweetalert</title>
+<title>Cita || Espacio Teodora</title>
 </head>
 <body>
 
@@ -87,6 +87,17 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 			or die('error: ' . mysqli_error($conexion));
 	}
 
+	foreach ( $selected_services_child as $service_child) {
+
+		$query = mysqli_query($conexion, "INSERT INTO services_booked(appointment_id, service_id)
+					VALUES('$appointment_id','$service_child')")
+			or die('error: ' . mysqli_error($conexion));
+	}
+
+	$query = mysqli_query($conexion, "INSERT INTO tempory_complementary(appoinments_id,clients_id,complementary_id)
+					VALUES('$appointment_id','$client_id','12')")
+			or die('error: ' . mysqli_error($conexion));
+
 }
 
 
@@ -101,7 +112,7 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 })
 .then((willDelete) => {
     if (willDelete) {
-           window.location = "profesional_services_rand.php";
+           window.location = "select_complementary.php";
     } else {
         
            window.location = "confirm_page_next.php";

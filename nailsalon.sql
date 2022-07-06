@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-07-2022 a las 04:29:40
+-- Tiempo de generación: 07-07-2022 a las 01:51:57
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -37,6 +37,14 @@ CREATE TABLE `appointments` (
   `canceled` tinyint(1) NOT NULL DEFAULT 0,
   `cancellation_reason` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `appointments`
+--
+
+INSERT INTO `appointments` (`appointment_id`, `date_created`, `client_id`, `employee_id`, `start_time`, `end_time_expected`, `canceled`, `cancellation_reason`) VALUES
+(118, '2022-07-06 23:48:45', 46, 5, '2022-07-12 14:30:00', '2022-07-12 16:00:00', 0, NULL),
+(119, '2022-07-06 23:50:44', 46, 7, '2022-07-15 14:30:00', '2022-07-15 16:00:00', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -224,8 +232,21 @@ INSERT INTO `services` (`service_id`, `service_name`, `service_description`, `se
 
 CREATE TABLE `services_booked` (
   `appointment_id` int(5) DEFAULT NULL,
-  `service_id` int(5) DEFAULT NULL
+  `service_id` int(5) DEFAULT NULL,
+  `employed_id` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `services_booked`
+--
+
+INSERT INTO `services_booked` (`appointment_id`, `service_id`, `employed_id`) VALUES
+(118, 13, 5),
+(118, 35, 5),
+(118, 20, 7),
+(119, 14, 0),
+(119, 35, 0),
+(119, 22, 7);
 
 -- --------------------------------------------------------
 
@@ -261,6 +282,20 @@ CREATE TABLE `tempory_appoinments` (
   `services_id` int(11) NOT NULL,
   `complementary_id` int(11) NOT NULL DEFAULT 0,
   `child_id` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tempory_complementary`
+--
+
+CREATE TABLE `tempory_complementary` (
+  `id` int(11) NOT NULL,
+  `appoinments_id` int(11) NOT NULL DEFAULT 0,
+  `clients_id` int(11) NOT NULL DEFAULT 0,
+  `complementary_id` int(11) NOT NULL DEFAULT 0,
+  `employed_complementary_id` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -328,6 +363,12 @@ ALTER TABLE `tempory_appoinments`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tempory_complementary`
+--
+ALTER TABLE `tempory_complementary`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -335,7 +376,7 @@ ALTER TABLE `tempory_appoinments`
 -- AUTO_INCREMENT de la tabla `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `appointment_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT de la tabla `barber_admin`
@@ -383,7 +424,13 @@ ALTER TABLE `service_categories`
 -- AUTO_INCREMENT de la tabla `tempory_appoinments`
 --
 ALTER TABLE `tempory_appoinments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+
+--
+-- AUTO_INCREMENT de la tabla `tempory_complementary`
+--
+ALTER TABLE `tempory_complementary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Restricciones para tablas volcadas

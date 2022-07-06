@@ -8,15 +8,17 @@ include "Includes/templates/header.php";
 require 'config/conexion.php';
 //include "Includes/templates/navbar.php";
 
-$radio_value = $_POST["radios"];
+//$radio_value = $_POST["radios"];
 //echo $radio_value;
 
-$query = mysqli_query($conexion, "SELECT * FROM service_categories WHERE category_id = '$radio_value'")
+$query = mysqli_query($conexion, "SELECT * FROM  tempory_complementary")
 	or die('error: ' . mysqli_error($conexion));
 
 $data_appoinment = mysqli_fetch_assoc($query);
 
-$category_name = $data_appoinment['category_name'];
+$complementary_id = $data_appoinment['complementary_id'];
+
+$appoinment_id = $data_appoinment['appoinments_id'];
 
 //echo $category_name;
 
@@ -51,7 +53,7 @@ $category_name = $data_appoinment['category_name'];
 
 		<!-- RESERVATION FORM -->
 
-		<form method="post" id="appointment_form" action="proses_category.php">
+		<form method="post" id="appointment_form" action="proses_category_complementary.php">
 
 			<!-- SELECT SERVICE -->
 
@@ -65,7 +67,7 @@ $category_name = $data_appoinment['category_name'];
 
 				<div class="text_header">
 					<span>
-						1. Seleccione Los Servicios
+						1. Seleccione Los Servicios Complementarios
 					</span>
 				</div>
 
@@ -73,10 +75,10 @@ $category_name = $data_appoinment['category_name'];
 
 				<div class="items_tab">
 					<div class="panel panel-default">
-						<div class="panel-body"><b style="color:#0033FF" ;><?php echo $category_name;?></b>
+						<div class="panel-body"><b style="color:#0033FF" ;></b>
 							<div class="items_tab">
 								<?php
-								$stmt = $con->prepare("SELECT * from services WHERE category_id = '$radio_value'");
+								$stmt = $con->prepare("SELECT * from services WHERE category_id = '$complementary_id'");
 								//$stmt = $con->prepare("Select * from services where category_id = '11' order by category_id");
 								$stmt->execute();
 								$rows = $stmt->fetchAll();
