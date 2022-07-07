@@ -9,6 +9,19 @@ require 'config/conexion.php';
 //include "Includes/templates/navbar.php";
 
 $radio_value = $_POST["radios"];
+
+$fecha_appoinment = $_POST["birthday"];
+
+
+$query = mysqli_query($conexion, "DELETE FROM date_appoinment")
+or die('error: ' . mysqli_error($conexion));
+
+
+$query = mysqli_query($conexion, "INSERT INTO date_appoinment(fecha)
+VALUES('$fecha_appoinment')")
+or die('error: ' . mysqli_error($conexion));
+
+
 //echo $radio_value;
 
 $query = mysqli_query($conexion, "SELECT * FROM service_categories WHERE category_id = '$radio_value'")
@@ -18,7 +31,7 @@ $data_appoinment = mysqli_fetch_assoc($query);
 
 $category_name = $data_appoinment['category_name'];
 
-//echo $category_name;
+echo $fecha_appoinment;
 
 ?>
 <!-- Appointment Page Stylesheet -->

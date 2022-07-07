@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-07-2022 a las 01:51:57
+-- Tiempo de generación: 07-07-2022 a las 03:25:28
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -43,8 +43,9 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`appointment_id`, `date_created`, `client_id`, `employee_id`, `start_time`, `end_time_expected`, `canceled`, `cancellation_reason`) VALUES
-(118, '2022-07-06 23:48:45', 46, 5, '2022-07-12 14:30:00', '2022-07-12 16:00:00', 0, NULL),
-(119, '2022-07-06 23:50:44', 46, 7, '2022-07-15 14:30:00', '2022-07-15 16:00:00', 0, NULL);
+(126, '2022-07-06 23:59:16', 46, 5, '2022-07-13 14:30:00', '2022-07-13 16:00:00', 0, NULL),
+(127, '2022-07-07 00:00:14', 46, 7, '2022-07-16 14:30:00', '2022-07-16 16:00:00', 0, NULL),
+(128, '2022-07-07 00:03:00', 45, 6, '2022-07-13 14:30:00', '2022-07-13 16:00:00', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,6 +95,24 @@ INSERT INTO `clients` (`client_id`, `first_name`, `last_name`, `phone_number`, `
 (48, '', '', '', ''),
 (49, 'mariana', 'lopez', '7865387629', 'mariasalazar@gmail.com'),
 (50, 'rosa', 'Salaverria', '7865387629', 'rosa_salaverria@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `date_appoinment`
+--
+
+CREATE TABLE `date_appoinment` (
+  `id` int(11) NOT NULL,
+  `fecha` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `date_appoinment`
+--
+
+INSERT INTO `date_appoinment` (`id`, `fecha`) VALUES
+(10, '2022-07-07');
 
 -- --------------------------------------------------------
 
@@ -241,12 +260,15 @@ CREATE TABLE `services_booked` (
 --
 
 INSERT INTO `services_booked` (`appointment_id`, `service_id`, `employed_id`) VALUES
-(118, 13, 5),
-(118, 35, 5),
-(118, 20, 7),
-(119, 14, 0),
-(119, 35, 0),
-(119, 22, 7);
+(126, 13, 5),
+(126, 35, 5),
+(126, 22, 6),
+(127, 14, 0),
+(127, 35, 0),
+(127, 22, 5),
+(128, 14, 0),
+(128, 36, 0),
+(128, 22, 6);
 
 -- --------------------------------------------------------
 
@@ -325,6 +347,12 @@ ALTER TABLE `clients`
   ADD UNIQUE KEY `client_email` (`client_email`);
 
 --
+-- Indices de la tabla `date_appoinment`
+--
+ALTER TABLE `date_appoinment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `employees`
 --
 ALTER TABLE `employees`
@@ -376,7 +404,7 @@ ALTER TABLE `tempory_complementary`
 -- AUTO_INCREMENT de la tabla `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `appointment_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT de la tabla `barber_admin`
@@ -389,6 +417,12 @@ ALTER TABLE `barber_admin`
 --
 ALTER TABLE `clients`
   MODIFY `client_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT de la tabla `date_appoinment`
+--
+ALTER TABLE `date_appoinment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`
@@ -424,13 +458,13 @@ ALTER TABLE `service_categories`
 -- AUTO_INCREMENT de la tabla `tempory_appoinments`
 --
 ALTER TABLE `tempory_appoinments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
 
 --
 -- AUTO_INCREMENT de la tabla `tempory_complementary`
 --
 ALTER TABLE `tempory_complementary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Restricciones para tablas volcadas

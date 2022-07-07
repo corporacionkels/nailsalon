@@ -4,6 +4,15 @@
 
 	include "connect.php";
 
+    require 'config/conexion.php';
+
+    $query = mysqli_query($conexion, "SELECT * FROM date_appoinment")
+	or die('error: ' . mysqli_error($conexion));
+
+    $data_appoinment = mysqli_fetch_assoc($query);
+
+    $appointment_date = $data_appoinment['fecha'];
+
 	if(isset($_POST['selected_employee']) && isset($_POST['selected_services']))
 	{
 
@@ -104,7 +113,7 @@
             <div class="appointments_days">
                 <?php
                     
-                    $appointment_date = date('Y-m-d');
+                 //   $appointment_date = date('Y-m-d');
 
                     for($i = 0; $i < 10; $i++)
                     {

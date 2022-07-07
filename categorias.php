@@ -7,6 +7,10 @@ require 'config/conexion.php';
 
   $query = mysqli_query($conexion, "DELETE FROM tempory_complementary")
   or die('error: ' . mysqli_error($conexion));
+                    
+  $appointment_date = date('Y-m-d');
+  //echo $appointment_date;
+
 ?>
 <!doctype html>
 <html>
@@ -18,6 +22,7 @@ require 'config/conexion.php';
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    
     <style>
         ::-webkit-scrollbar {
             width: 8px;
@@ -211,6 +216,8 @@ require 'config/conexion.php';
                                
                                 <a href="http://www.espacioteodora.cl/" class="btn btn-outline-secondary" role="button"  aria-pressed="true">Home</a>
                             </div>
+                            <label for="birthday">Seleccione la Fecha:</label>
+                            <input type="date" id="birthday" name="birthday" value="<?php echo $appointment_date ?>">
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-primary">Continuar <span class="ml-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span> </button>
                             </div>
