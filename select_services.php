@@ -12,13 +12,15 @@ $radio_value = $_POST["radios"];
 
 $fecha_appoinment = $_POST["birthday"];
 
+$time_appoinment = $_POST["time"];
+
 
 $query = mysqli_query($conexion, "DELETE FROM date_appoinment")
 or die('error: ' . mysqli_error($conexion));
 
 
-$query = mysqli_query($conexion, "INSERT INTO date_appoinment(fecha)
-VALUES('$fecha_appoinment')")
+$query = mysqli_query($conexion, "INSERT INTO date_appoinment(fecha,time)
+VALUES('$fecha_appoinment','$time_appoinment')")
 or die('error: ' . mysqli_error($conexion));
 
 
@@ -32,6 +34,8 @@ $data_appoinment = mysqli_fetch_assoc($query);
 $category_name = $data_appoinment['category_name'];
 
 echo $fecha_appoinment;
+echo ' Hora de la Cita';
+echo $time_appoinment;
 
 ?>
 <!-- Appointment Page Stylesheet -->

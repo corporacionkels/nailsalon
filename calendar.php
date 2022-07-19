@@ -13,6 +13,8 @@
 
     $appointment_date = $data_appoinment['fecha'];
 
+    $appointment_time = $data_appoinment['time'];
+
 	if(isset($_POST['selected_employee']) && isset($_POST['selected_services']))
 	{
 
@@ -117,7 +119,7 @@
 
                     for($i = 0; $i < 10; $i++)
                     {
-                        $appointment_date = date('Y-m-d', strtotime($appointment_date . ' +1 day'));
+                       // $appointment_date = date('Y-m-d', strtotime($appointment_date . ' +1 day'));
                         echo "<div class = 'appointment_day'>";
                             echo date('D', strtotime($appointment_date));
                             echo "<br>";
@@ -151,6 +153,7 @@
 		                
 		            }
             
+                   // echo $sum_duration;
             
 		            $sum_duration = date('H:i',mktime(0,$sum_duration));
 		            $secs = strtotime($sum_duration)-strtotime("00:00:00");
@@ -165,14 +168,17 @@
                     $secs = strtotime($sum_duration)-strtotime("00:00:00");
                     $result = date("H:i:s",strtotime($start)+$secs);
 
+                    $open_time = $appointment_time;
 
-                    $appointment_date = date('Y-m-d');
+                    echo $appointment_time;
+
+                   // $appointment_date = date('Y-m-d');
 
                     for($i = 0; $i < 10; $i++)
                     {
                         echo "<div class='available_booking_hours_colum'>";
 
-                            $appointment_date = date('Y-m-d', strtotime($appointment_date . ' +1 day'));
+                            //$appointment_date = date('Y-m-d', strtotime($appointment_date . ' +1 day'));
                             $start = $open_time;
                             $secs = strtotime($sum_duration)-strtotime("00:00:00");
                             $result = date("H:i:s",strtotime($start)+$secs);
@@ -238,8 +244,9 @@
                                     //Show Blank cell
                                 }
                                 
-
+                                 
                                 $start = strtotime("+90 minutes", strtotime($start));
+
                                 $start =  date('H:i', $start);
 
                                 $secs = strtotime($sum_duration)-strtotime("00:00:00");

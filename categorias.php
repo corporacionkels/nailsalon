@@ -2,14 +2,14 @@
 
 require 'config/conexion.php';
 
-  $query = mysqli_query($conexion, "DELETE FROM  tempory_appoinments")
-  or die('error: ' . mysqli_error($conexion));
+$query = mysqli_query($conexion, "DELETE FROM  tempory_appoinments")
+    or die('error: ' . mysqli_error($conexion));
 
-  $query = mysqli_query($conexion, "DELETE FROM tempory_complementary")
-  or die('error: ' . mysqli_error($conexion));
-                    
-  $appointment_date = date('Y-m-d');
-  //echo $appointment_date;
+$query = mysqli_query($conexion, "DELETE FROM tempory_complementary")
+    or die('error: ' . mysqli_error($conexion));
+
+$appointment_date = date('Y-m-d');
+//echo $appointment_date;
 
 ?>
 <!doctype html>
@@ -22,7 +22,7 @@ require 'config/conexion.php';
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    
+
     <style>
         ::-webkit-scrollbar {
             width: 8px;
@@ -151,78 +151,96 @@ require 'config/conexion.php';
                                 <p> Que Servicio Desea Agendar ? <span class=" ml-1 cursor-pointer"> Seleccione </span> </p>
                             </div>
                         </div>
-             <form id="form" name="login-form" method="POST" action="select_services.php">         
-                        <div class="radio-group row justify-content-between px-3 text-center a">
-                            <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
-                                <div class="flex-row">
-                                    <div class="col">
-                                        <div class="pic"> <img class="irc_mut img-fluid" src="https://aprende.com/wp-content/uploads/2020/09/preparate-para-aumentar-tus-ingresos-salida-laboral-en-manicure--940x580.jpg" width="300" height="300"> </div>
-                                        <p></p>
-                                    </div>
-                                    <input type="radio" name="radios" id="radio1" value='11' class="invisible-radio">
-                                    <label for="radio1">
-                                        Manicure
-                                        <div class="styled-radio red" data-text="Logo 1"></div>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
-                                <div class="flex-row">
-                                    <div class="col">
-                                        <div class="pic"> <img class="irc_mut img-fluid" src="https://diseñosuñas.com/wp-content/uploads/2021/03/pedicura-disenos-02.jpg" width="300" height="300"> </div>
-                                        <p></p>
-                                        <input type="radio" name="radios" id="radio2" value='12' class="invisible-radio">
-                                        <label for="radio2">
-                                            Pedicure
-                                            <div class="styled-radio green" data-text="Logo 2"></div>
+                        <form id="form" name="login-form" method="POST" action="select_services.php">
+                            <div class="radio-group row justify-content-between px-3 text-center a">
+                                <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
+                                    <div class="flex-row">
+                                        <div class="col">
+                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://aprende.com/wp-content/uploads/2020/09/preparate-para-aumentar-tus-ingresos-salida-laboral-en-manicure--940x580.jpg" width="300" height="300"> </div>
+                                            <p></p>
+                                        </div>
+                                        <input type="radio" name="radios" id="radio1" value='11' class="invisible-radio">
+                                        <label for="radio1">
+                                            Manicure
+                                            <div class="styled-radio red" data-text="Logo 1"></div>
                                         </label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
-                                <div class="flex-row">
-                                    <div class="col">
-                                        <div class="pic"> <img class="irc_mut img-fluid" src="https://www.cimformacion.com/blog/wp-content/uploads/2017/01/limpieza-facial-min.jpg" width="300" height="300"> </div>
-                                        <p></p>
-                                        <input type="radio" name="radios" id="radio3" value='14' class="invisible-radio">
-                                        <label for="radio3">
-                                            Faciales
-                                            <div class="styled-radio blue" data-text="Logo 3"></div>
-                                        </label>
+                                <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
+                                    <div class="flex-row">
+                                        <div class="col">
+                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://diseñosuñas.com/wp-content/uploads/2021/03/pedicura-disenos-02.jpg" width="300" height="300"> </div>
+                                            <p></p>
+                                            <input type="radio" name="radios" id="radio2" value='12' class="invisible-radio">
+                                            <label for="radio2">
+                                                Pedicure
+                                                <div class="styled-radio green" data-text="Logo 2"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
+                                    <div class="flex-row">
+                                        <div class="col">
+                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://www.cimformacion.com/blog/wp-content/uploads/2017/01/limpieza-facial-min.jpg" width="300" height="300"> </div>
+                                            <p></p>
+                                            <input type="radio" name="radios" id="radio3" value='14' class="invisible-radio">
+                                            <label for="radio3">
+                                                Faciales
+                                                <div class="styled-radio blue" data-text="Logo 3"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto ml-sm-2 mx-1 card-block  py-0 text-center radio  ">
+                                    <div class="flex-row">
+                                        <div class="col">
+                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://belessaesthetic.com/wp-content/uploads/2019/10/masajes-en-zaragoza.jpg" width="300" height="300"> </div>
+                                            <p></p>
+                                            <input type="radio" name="radios" id="radio4" value='15' class="invisible-radio" checked>
+                                            <label for="radio4">
+                                                Corporales
+                                                <div class="styled-radio blue" data-text="Logo 3"></div>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-auto ml-sm-2 mx-1 card-block  py-0 text-center radio  ">
-                                <div class="flex-row">
-                                    <div class="col">
-                                        <div class="pic"> <img class="irc_mut img-fluid" src="https://belessaesthetic.com/wp-content/uploads/2019/10/masajes-en-zaragoza.jpg" width="300" height="300"> </div>
-                                        <p></p>
-                                        <input type="radio" name="radios" id="radio4" value='15' class="invisible-radio"  checked>
-                                        <label for="radio4">
-                                            Corporales
-                                            <div class="styled-radio blue" data-text="Logo 3"></div>
-                                        </label>
-                                    </div>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <p class="text-muted"></p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col">
-                                <p class="text-muted"></p>
+                            <div class="row justify-content-between">
+                                <div class="col-auto">
+
+                                    <a href="http://www.espacioteodora.cl/" class="btn btn-outline-secondary" role="button" aria-pressed="true">Home</a>
+                                </div>
+                                <label for="birthday">Seleccione la Fecha:</label>
+                               <input type="date" id="birthday" name="birthday" value="<?php echo $appointment_date ?>">
+                               <label for="birthday">Seleccione la Hora:</label>
+                                <select name="time">
+                              
+                                    <option value="10:00" selected="">10.00 AM</option>
+                                    <option value="10:00">10.00 AM</option>
+                       
+                                    <option value="11:30">11.30 AM</option>
+                                    <option value="13:00">01.00 PM</option>
+                                    <option value="14:30">02.30 PM</option>
+                                    
+                                    <option value="15:30">03.30 PM</option>
+                                    <option value="17:00">05.00 PM</option>
+                                    
+                                    <option value="18:30">06.30 PM</option>
+                                    
+                                    <option value="20:00">08.00 PM</option>
+                                    
+                                </select>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary">Continuar <span class="ml-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span> </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-between">
-                            <div class="col-auto">
-                               
-                                <a href="http://www.espacioteodora.cl/" class="btn btn-outline-secondary" role="button"  aria-pressed="true">Home</a>
-                            </div>
-                            <label for="birthday">Seleccione la Fecha:</label>
-                            <input type="date" id="birthday" name="birthday" value="<?php echo $appointment_date ?>">
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-primary">Continuar <span class="ml-2"><i class="fa fa-angle-right" aria-hidden="true"></i></span> </button>
-                            </div>
-                        </div>
-            </form>
+                        </form>
                     </div>
                 </div>
             </div>

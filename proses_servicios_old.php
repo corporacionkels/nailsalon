@@ -17,8 +17,6 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 
 	$selected_date_time = explode(' ', $_POST['desired_date_time']);
 
-	echo $selected_date_time;
-
 	$date_selected = $selected_date_time[0];
 	$start_time = $date_selected . " " . $selected_date_time[1];
 	$end_time = $date_selected . " " . $selected_date_time[2];
