@@ -21,6 +21,82 @@ $service_id = $data_appoinment['complementary_id'];
 $appoinment_id = $data_appoinment['appoinments_id'];
 
 
+$query = mysqli_query($conexion, "SELECT * FROM  appointments where appointment_id ='$appoinment_id'")
+	or die('error: ' . mysqli_error($conexion));
+
+$data_appoinment_employeed = mysqli_fetch_assoc($query);
+
+$employeed_id = $data_appoinment_employeed['employee_id'];
+
+$query = mysqli_query($conexion, "SELECT * FROM date_appoinment")
+	or die('error: ' . mysqli_error($conexion));
+
+$data_dateappoinment = mysqli_fetch_assoc($query);
+
+$fecha_appoinment = $data_dateappoinment['fecha'];
+
+$time_appoinment = $data_dateappoinment['time'];
+
+$lafecha =  $fecha_appoinment.' '.$time_appoinment;
+
+$orgDate = $fecha_appoinment;  
+$newDate = date("d-m-Y", strtotime($orgDate));  
+
+$date=$fecha_appoinment;
+$eldia = date('l', strtotime($date));
+
+//echo $fecha_appoinment;
+//echo $time_appoinment;
+//echo 'El Empleado es ';
+//echo $employeed_id;
+//echo 'La Consulta es con ';
+//echo $lafecha;
+
+
+
+if ($eldia== 'Monday'){
+	//echo 'Es el numero 1';
+	$elnumero = 1;
+	
+	}
+
+if ($eldia== 'Tuesday'){
+//echo 'Es el numero 2';
+$elnumero = 2;
+
+}
+
+if ($eldia== 'Wednesday'){
+//	echo 'Es el numero 3';
+	$elnumero = 3;
+	
+}
+
+if ($eldia== 'Thursday'){
+//	echo 'Es el numero 4';
+	$elnumero = 4;
+	
+}
+
+if ($eldia== 'Friday'){
+//	echo 'Es el numero 5';
+	$elnumero = 5;
+	
+}
+
+if ($eldia== 'Saturday'){
+//	echo 'Es el numero 6';
+	$elnumero = 6;
+	
+}
+
+if ($eldia== 'Sunday'){
+//	echo 'Es el numero 7';
+	$elnumero = 7;
+	
+}
+
+
 //echo $service_id;
 //echo ' id del profesional';
 //echo $employed_id;
@@ -87,33 +163,36 @@ $appoinment_id = $data_appoinment['appoinments_id'];
 								$rows = $stmt->fetchAll();
 
 								foreach ($rows as $row) {
-									echo "<div class='itemListElement'>";
-									echo "<div class = 'item_details'>";
-									echo "<div>";
-									echo $row['service_name'];
-									echo "</div>";
-									echo "<div class = 'item_select_part'>";
-									echo "<span class = 'service_duration_field'>";
-									echo $row['service_duration'] . " min";
-									echo "</span>";
-									echo "<div class = 'service_price_field'>";
-									echo "<span style = 'font-weight: bold;'>";
-									echo $row['service_price'] . "$";
-									echo "</span>";
-									echo "</div>";
-								?>
-									<div class="select_item_bttn">
-										<div class="btn-group-toggle" data-toggle="buttons">
-											<label class="service_label item_label btn btn-secondary">
-												<input type="checkbox" name="selected_services[]" value="<?php echo $row['service_id'] ?>" autocomplete="off" readonly checked>Agendado
-												<input type="hidden" name="appoinment_id" value="<?php echo $appoinment_id ?>">
-											</label>
+
+
+										echo "<div class='itemListElement'>";
+										echo "<div class = 'item_details'>";
+										echo "<div>";
+										echo $row['service_name'];
+										echo "</div>";
+										echo "<div class = 'item_select_part'>";
+										echo "<span class = 'service_duration_field'>";
+										echo $row['service_duration'] . " min";
+										echo "</span>";
+										echo "<div class = 'service_price_field'>";
+										echo "<span style = 'font-weight: bold;'>";
+										echo $row['service_price'] . "$";
+										echo "</span>";
+										echo "</div>";
+									?>
+										<div class="select_item_bttn">
+											<div class="btn-group-toggle" data-toggle="buttons">
+												<label class="service_label item_label btn btn-secondary">
+													<input type="checkbox" name="selected_services[]" value="<?php echo $row['service_id'] ?>" autocomplete="off" readonly checked>Agendado
+													<input type="hidden" name="appoinment_id" value="<?php echo $appoinment_id ?>">
+												</label>
+											</div>
 										</div>
-									</div>
-								<?php
-									echo "</div>";
-									echo "</div>";
-									echo "</div>";
+									<?php
+										echo "</div>";
+										echo "</div>";
+										echo "</div>";
+									
 								}
 								?>
 							</div>
@@ -145,27 +224,44 @@ $appoinment_id = $data_appoinment['appoinments_id'];
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<div class="items_tab3">
 						<?php
-						$stmt = $con->prepare("Select * from employees ");
+						//$stmt = $con->prepare("SELECT * from employees where employee_id<>'$employeed_id'");
+						$stmt = $con->prepare("SELECT * FROM `employees_schedule` as a inner JOIN employees as b on a.employee_id = b.employee_id WHERE `day_id` = '$elnumero' and `to_hour` > '$time_appoinment' and a.employee_id<>'$employeed_id';");
 						$stmt->execute();
 						$rows = $stmt->fetchAll();
 
 						foreach ($rows as $row) {
-							echo "<div class='itemListElement'>";
-							echo "<div class = 'item_details'>";
-							echo "<div>";
-							echo $row['first_name'] . " " . $row['last_name'];
-							echo "</div>";
-							echo "<div class = 'item_select_part'>";
-						?>
-							<div class="select_item_bttn">
-								<label class="item_label btn btn-secondary active">
-									<input type="radio" class="radio_employee_select" name="selected_employee" value="<?php echo $row['employee_id'] ?>"  >Agendar
-								</label>
-							</div>
-						<?php
-							echo "</div>";
-							echo "</div>";
-							echo "</div>";
+
+							$query_id = mysqli_query($conexion, "SELECT * FROM `appointments` WHERE `employee_id` = '$row[employee_id]' and `start_time` = '$lafecha'")
+								or die('Error : ' . mysqli_error($conexion));
+						
+							$count = mysqli_num_rows($query_id);
+						
+							if ($count <> 0) {
+						
+							
+								
+							} else {
+
+
+
+									echo "<div class='itemListElement'>";
+									echo "<div class = 'item_details'>";
+									echo "<div>";
+									echo $row['first_name'] . " " . $row['last_name'];
+									echo "</div>";
+									echo "<div class = 'item_select_part'>";
+								?>
+									<div class="select_item_bttn">
+										<label class="item_label btn btn-secondary active">
+											<input type="radio" class="radio_employee_select" name="selected_employee" value="<?php echo $row['employee_id'] ?>"  >Agendar
+										</label>
+									</div>
+								<?php
+									echo "</div>";
+									echo "</div>";
+									echo "</div>";
+							}
+
 						}
 						?>
 					</div>

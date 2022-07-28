@@ -26,6 +26,71 @@ $data_appoinment = mysqli_fetch_assoc($query);
 $employed_id = $data_appoinment['employee_id'];
 
 
+$query = mysqli_query($conexion, "SELECT * FROM date_appoinment")
+	or die('error: ' . mysqli_error($conexion));
+
+$data_dateappoinment = mysqli_fetch_assoc($query);
+
+$fecha_appoinment = $data_dateappoinment['fecha'];
+
+$time_appoinment = $data_dateappoinment['time'];
+
+$lafecha =  $fecha_appoinment.' '.$time_appoinment;
+
+$orgDate = $fecha_appoinment;  
+$newDate = date("d-m-Y", strtotime($orgDate));  
+
+$date=$fecha_appoinment;
+$eldia = date('l', strtotime($date));
+//echo date('l', strtotime($date));
+//echo $eldia;
+//echo 'Hora de la cita';
+//echo $time_appoinment;
+
+
+if ($eldia== 'Monday'){
+	//echo 'Es el numero 1';
+	$elnumero = 1;
+	
+	}
+
+if ($eldia== 'Tuesday'){
+//echo 'Es el numero 2';
+$elnumero = 2;
+
+}
+
+if ($eldia== 'Wednesday'){
+//	echo 'Es el numero 3';
+	$elnumero = 3;
+	
+}
+
+if ($eldia== 'Thursday'){
+//	echo 'Es el numero 4';
+	$elnumero = 4;
+	
+}
+
+if ($eldia== 'Friday'){
+//	echo 'Es el numero 5';
+	$elnumero = 5;
+	
+}
+
+if ($eldia== 'Saturday'){
+//	echo 'Es el numero 6';
+	$elnumero = 6;
+	
+}
+
+if ($eldia== 'Sunday'){
+//	echo 'Es el numero 7';
+	$elnumero = 7;
+	
+}
+
+
 //echo $service_id;
 //echo ' id del profesional';
 //echo $employed_id;
@@ -149,27 +214,54 @@ $employed_id = $data_appoinment['employee_id'];
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<div class="items_tab3">
 						<?php
-						$stmt = $con->prepare("Select * from employees where employee_id = '$employed_id'");
+						//$stmt = $con->prepare("Select * from employees where employee_id = '$employed_id'");
+						//$stmt = $con->prepare("SELECT * FROM `employees_schedule` as a inner JOIN employees as b on a.employee_id = b.employee_id WHERE `day_id` = '$elnumero' and `to_hour` > '$time_appoinment'ORDER BY RAND() LIMIT 1,1;");
+						$stmt = $con->prepare("SELECT * FROM `employees_schedule` as a inner JOIN employees as b on a.employee_id = b.employee_id WHERE `day_id` = '$elnumero' and `to_hour` > '$time_appoinment';");
 						$stmt->execute();
 						$rows = $stmt->fetchAll();
-
+ 
+						$hola = 0;
+						 
 						foreach ($rows as $row) {
-							echo "<div class='itemListElement'>";
-							echo "<div class = 'item_details'>";
-							echo "<div>";
-							echo $row['first_name'] . " " . $row['last_name'];
-							echo "</div>";
-							echo "<div class = 'item_select_part'>";
-						?>
-							<div class="select_item_bttn">
-								<label class="item_label btn btn-secondary active">
-									<input type="radio" class="radio_employee_select" name="selected_employee" value="<?php echo $row['employee_id'] ?>" readonly checked >Agendado
-								</label>
-							</div>
-						<?php
-							echo "</div>";
-							echo "</div>";
-							echo "</div>";
+
+							$query_id = mysqli_query($conexion, "SELECT * FROM `appointments` WHERE `employee_id` = '$row[employee_id]' and `start_time` = '$lafecha'")
+								or die('Error : ' . mysqli_error($conexion));
+						
+							$count = mysqli_num_rows($query_id);
+
+							$hola = $hola + 1;
+
+							//echo $hola;
+						
+							if ($count <> 0) {
+						
+							
+								
+							} else {
+
+										echo "<div class='itemListElement'>";
+										echo "<div class = 'item_details'>";
+										echo "<div>";
+										echo $row['first_name'] . " " . $row['last_name'];
+										echo "</div>";
+										echo "<div class = 'item_select_part'>";
+									?>
+										<div class="select_item_bttn">
+											<label class="item_label btn btn-secondary active">
+												<input type="radio" class="radio_employee_select" name="selected_employee" value="<?php echo $row['employee_id'] ?>" checked>Agendar
+											</label>
+										</div>
+									<?php
+										echo "</div>";
+										echo "</div>";
+										echo "</div>";
+
+										break;
+								
+							}
+
+
+
 						}
 						?>
 					</div>
@@ -189,11 +281,24 @@ $employed_id = $data_appoinment['employee_id'];
 
 				<div class="text_header">
 					<span>
-						3. Seleccione Dia y Hora
+						3. Fecha y Hora Seleccionados
 					</span>
 				</div>
 
-				<div class="calendar_tab" style="overflow-x: auto;overflow-y: visible;" id="calendar_tab_in">
+				<div class="form-group colum-row row">
+					<div class="col-sm-6">
+						<input type="text"  value="<?php echo $newDate?>" class="form-control" placeholder="First Name" readonly>
+						<span class="invalid-feedback">Este Dato es Requerido</span>
+					</div>
+					<div class="col-sm-6">
+						<input type="text" value="<?php echo $time_appoinment?>" class="form-control" placeholder="Last Name" readonly>
+						<span class="invalid-feedback">Este Dato es Requerido</span>
+					</div>
+	
+				</div>
+
+
+				<div class="calendar_tab" style="display:none;"  id="calendar_tab_in">
 					<div id="calendar_loading">
 						<img src="Design/images/ajax_loader_gif.gif" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
@@ -231,7 +336,7 @@ $employed_id = $data_appoinment['employee_id'];
 							<span class="invalid-feedback">Numero Telefono Invalido</span>
 						</div>
 						<div class="col-sm-6" style="display:none;">
-							<input type="text" name="servicio_complementario"  value="<?php echo $radio_value ?>" class="form-control" placeholder="Phone number">
+							<input type="text" name="servicio_complementario" value="<?php echo $radio_value ?>" class="form-control" placeholder="Phone number">
 							<span class="invalid-feedback">Para el Servicio Complementario</span>
 						</div>
 					</div>

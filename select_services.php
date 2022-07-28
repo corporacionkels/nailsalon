@@ -8,11 +8,11 @@ include "Includes/templates/header.php";
 require 'config/conexion.php';
 //include "Includes/templates/navbar.php";
 
-$radio_value = $_POST["radios"];
+$radio_value = $_GET["radios"];
 
-$fecha_appoinment = $_POST["birthday"];
+$fecha_appoinment = $_GET["birthday"];
 
-$time_appoinment = $_POST["time"];
+$time_appoinment = $_GET["time"];
 
 
 $query = mysqli_query($conexion, "DELETE FROM date_appoinment")
@@ -33,9 +33,17 @@ $data_appoinment = mysqli_fetch_assoc($query);
 
 $category_name = $data_appoinment['category_name'];
 
-echo $fecha_appoinment;
-echo ' Hora de la Cita';
-echo $time_appoinment;
+//echo $fecha_appoinment;
+//echo ' Hora de la Cita';
+//echo $time_appoinment;
+// El dia de la semana
+//$dias = array("domingo","lunes","martes","miércoles","jueves","viernes","sábado");
+//echo "Buenos días, hoy es ".$dias[date("w")];
+
+$date=$fecha_appoinment;
+//echo date('l', strtotime($date));
+//output:
+
 
 ?>
 <!-- Appointment Page Stylesheet -->

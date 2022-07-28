@@ -112,7 +112,7 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 })
 .then((willDelete) => {
     if (willDelete) {
-           window.location = "select_complementary.php";
+           window.location = "loading_complementary.php";
     } else {
         
            window.location = "confirm_page_next.php";

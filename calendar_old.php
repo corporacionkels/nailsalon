@@ -172,13 +172,6 @@
 
                     echo $appointment_time;
 
-                    echo ' El inicio';
-
-                    echo $start;
-
-                    echo ' El final';
-                    echo $result;
-
                    // $appointment_date = date('Y-m-d');
 
                     for($i = 0; $i < 10; $i++)
@@ -191,8 +184,6 @@
                             $result = date("H:i:s",strtotime($start)+$secs);
 
                             $day_id = date('w',strtotime($appointment_date));
-
-                            $hola = 0;
                             
                             while($start >= $open_time && $result <= $close_time)
                             {
@@ -205,7 +196,7 @@
                                     and day_id = ?
                                     and ? between from_hour and to_hour
                                     and ? between from_hour and to_hour
-                                    
+                                       
                                 ");
                                 $stmt_emp->execute(array($selected_employee,$day_id,$start, $result));
                                 $emp = $stmt_emp->fetchAll();
@@ -231,25 +222,21 @@
                                                 or
                                                 time(end_time_expected) between ? and ?
                                             )
-                                            
                                     ");
                                     
                                     $stmt->execute(array($appointment_date,$selected_employee,$start,$result,$start,$result));
                                     $rows = $stmt->fetchAll();
-
+                        
                                     if($stmt->rowCount() != 0)
                                     {
                                         //Show blank cell
                                     }
                                     else
                                     {
-                                        if($hola == 0) {
                                         ?>
-                                       
-                                            <input type="radio" id="<?php echo $appointment_date." ".$start; ?>" name="desired_date_time" value="<?php echo $appointment_date." ".$start." ".$result; ?> " checked>
+                                            <input type="radio" id="<?php echo $appointment_date." ".$start; ?>" name="desired_date_time" value="<?php echo $appointment_date." ".$start." ".$result; ?>">
                                             <label class="available_booking_hour" for="<?php echo $appointment_date." ".$start; ?>"><?php echo $start; ?></label>
                                         <?php
-                                        }
                                     }
                                 }
                                 else
@@ -264,9 +251,6 @@
 
                                 $secs = strtotime($sum_duration)-strtotime("00:00:00");
                                 $result = date("H:i",strtotime($start)+$secs);
-
-                                $hola = $hola + 1;
-                                //echo $hola;
                             }
 
                         echo "</div>";
@@ -278,7 +262,6 @@
 	}
     else
     {
-        
         header('location: index.php');
         exit();
     }

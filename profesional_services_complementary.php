@@ -20,6 +20,70 @@ $service_id = $data_appoinment['services_id'];
 
 $child_id = $data_appoinment['child_id'];
 
+$query = mysqli_query($conexion, "SELECT * FROM date_appoinment")
+	or die('error: ' . mysqli_error($conexion));
+
+$data_dateappoinment = mysqli_fetch_assoc($query);
+
+$fecha_appoinment = $data_dateappoinment['fecha'];
+
+$time_appoinment = $data_dateappoinment['time'];
+
+$lafecha =  $fecha_appoinment.' '.$time_appoinment;
+
+$orgDate = $fecha_appoinment;  
+$newDate = date("d-m-Y", strtotime($orgDate));  
+
+$date=$fecha_appoinment;
+$eldia = date('l', strtotime($date));
+//echo date('l', strtotime($date));
+//echo $eldia;
+//echo 'Hora de la cita';
+//echo $time_appoinment;
+
+
+if ($eldia== 'Monday'){
+	//echo 'Es el numero 1';
+	$elnumero = 1;
+	
+	}
+
+if ($eldia== 'Tuesday'){
+//echo 'Es el numero 2';
+$elnumero = 2;
+
+}
+
+if ($eldia== 'Wednesday'){
+//	echo 'Es el numero 3';
+	$elnumero = 3;
+	
+}
+
+if ($eldia== 'Thursday'){
+//	echo 'Es el numero 4';
+	$elnumero = 4;
+	
+}
+
+if ($eldia== 'Friday'){
+//	echo 'Es el numero 5';
+	$elnumero = 5;
+	
+}
+
+if ($eldia== 'Saturday'){
+//	echo 'Es el numero 6';
+	$elnumero = 6;
+	
+}
+
+if ($eldia== 'Sunday'){
+//	echo 'Es el numero 7';
+	$elnumero = 7;
+	
+}
+
 //echo $category_name;
 
 ?>
@@ -193,27 +257,45 @@ $child_id = $data_appoinment['child_id'];
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<div class="items_tab3">
 						<?php
-						$stmt = $con->prepare("Select * from employees");
+					//	$stmt = $con->prepare("Select * from employees");
+						$stmt = $con->prepare("SELECT * FROM `employees_schedule` as a inner JOIN employees as b on a.employee_id = b.employee_id WHERE `day_id` = '$elnumero' and `to_hour` > '$time_appoinment';");
 						$stmt->execute();
 						$rows = $stmt->fetchAll();
 
 						foreach ($rows as $row) {
-							echo "<div class='itemListElement'>";
-							echo "<div class = 'item_details'>";
-							echo "<div>";
-							echo $row['first_name'] . " " . $row['last_name'];
-							echo "</div>";
-							echo "<div class = 'item_select_part'>";
-						?>
-							<div class="select_item_bttn">
-								<label class="item_label btn btn-secondary active">
-									<input type="radio" class="radio_employee_select" name="selected_employee" value="<?php echo $row['employee_id'] ?>">Agendar
-								</label>
-							</div>
-						<?php
-							echo "</div>";
-							echo "</div>";
-							echo "</div>";
+
+							$query_id = mysqli_query($conexion, "SELECT * FROM `appointments` WHERE `employee_id` = '$row[employee_id]' and `start_time` = '$lafecha'")
+								or die('Error : ' . mysqli_error($conexion));
+						
+							$count = mysqli_num_rows($query_id);
+						
+							if ($count <> 0) {
+						
+							
+								
+							} else {
+
+									echo "<div class='itemListElement'>";
+									echo "<div class = 'item_details'>";
+									echo "<div>";
+									echo $row['first_name'] . " " . $row['last_name'];
+									echo "</div>";
+									echo "<div class = 'item_select_part'>";
+								?>
+									<div class="select_item_bttn">
+										<label class="item_label btn btn-secondary active">
+											<input type="radio" class="radio_employee_select" name="selected_employee" value="<?php echo $row['employee_id'] ?>">Agendar
+										</label>
+									</div>
+								<?php
+									echo "</div>";
+									echo "</div>";
+									echo "</div>";
+
+							}
+
+
+
 						}
 						?>
 					</div>
@@ -237,7 +319,20 @@ $child_id = $data_appoinment['child_id'];
 					</span>
 				</div>
 
-				<div class="calendar_tab" style="overflow-x: auto;overflow-y: visible;" id="calendar_tab_in">
+				<div class="form-group colum-row row">
+					<div class="col-sm-6">
+						<input type="text"  value="<?php echo $newDate?>" class="form-control" placeholder="First Name" readonly>
+						<span class="invalid-feedback">Este Dato es Requerido</span>
+					</div>
+					<div class="col-sm-6">
+						<input type="text" value="<?php echo $time_appoinment?>" class="form-control" placeholder="Last Name" readonly>
+						<span class="invalid-feedback">Este Dato es Requerido</span>
+					</div>
+	
+				</div>
+
+
+				<div class="calendar_tab" style="display:none;"  id="calendar_tab_in">
 					<div id="calendar_loading">
 						<img src="Design/images/ajax_loader_gif.gif" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>

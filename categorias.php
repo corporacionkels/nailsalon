@@ -151,7 +151,7 @@ $appointment_date = date('Y-m-d');
                                 <p> Que Servicio Desea Agendar ? <span class=" ml-1 cursor-pointer"> Seleccione </span> </p>
                             </div>
                         </div>
-                        <form id="form" name="login-form" method="POST" action="select_services.php">
+                        <form id="form" name="login-form" method="POST" action="loading_services.php">
                             <div class="radio-group row justify-content-between px-3 text-center a">
                                 <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
                                     <div class="flex-row">
@@ -221,19 +221,19 @@ $appointment_date = date('Y-m-d');
                                <label for="birthday">Seleccione la Hora:</label>
                                 <select name="time">
                               
-                                    <option value="10:00" selected="">10.00 AM</option>
-                                    <option value="10:00">10.00 AM</option>
+                                    <option value="10:00" selected="">10:00 AM</option>
+                                    <option value="10:00">10:00 AM</option>
                        
-                                    <option value="11:30">11.30 AM</option>
-                                    <option value="13:00">01.00 PM</option>
-                                    <option value="14:30">02.30 PM</option>
+                                    <option value="11:30">11:30 AM</option>
+                                    <option value="13:00">01:00 PM</option>
+                                    <option value="14:30">02:30 PM</option>
                                     
-                                    <option value="15:30">03.30 PM</option>
-                                    <option value="17:00">05.00 PM</option>
+                                    <option value="15:30">03:30 PM</option>
+                                    <option value="17:00">05:00 PM</option>
                                     
-                                    <option value="18:30">06.30 PM</option>
+                                    <option value="18:30">06:30 PM</option>
                                     
-                                    <option value="20:00">08.00 PM</option>
+                                    <option value="20:00">08:00 PM</option>
                                     
                                 </select>
                                 <div class="col-auto">
