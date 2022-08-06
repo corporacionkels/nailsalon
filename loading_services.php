@@ -23,17 +23,64 @@ $time_appoinment = $_POST["time"];
 $date = $fecha_appoinment;
 $eldia = date('l', strtotime($date));
 $lafecha =  $fecha_appoinment.' '.$time_appoinment;
-
+//echo 'Fecha de la Cita ';
 //echo $fecha_appoinment;
+//echo 'La Fecha Actual ';
+$fechaActual = date('Y-m-d');
+   
+//echo $fechaActual;
 //echo ' Hora de la Cita';
 //echo $time_appoinment;
 // El dia de la semana
 //$dias = array("domingo","lunes","martes","miércoles","jueves","viernes","sábado");
 //echo "Buenos días, hoy es ".$dias[date("w")];
 
-$date = $fecha_appoinment;
+//$date = $fecha_appoinment;
 //echo date('l', strtotime($date));
 //echo $lafecha;
+
+
+date_default_timezone_set('America/Caracas');
+
+  $fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+  //$fecha_entrada = strtotime($time_appoinment);
+  //$fecha_media = strtotime($hora_inicio);
+
+  $horaInicial=$time_appoinment;
+  $minutoAnadir=-30;
+   
+  $segundos_horaInicial=strtotime($horaInicial);
+   
+  $segundos_minutoAnadir=$minutoAnadir*60;
+   
+  $nuevaHora=date("H:i",$segundos_horaInicial+$segundos_minutoAnadir);
+   
+  //echo "<br>".$nuevaHora;
+  $fecha_entrada = strtotime($nuevaHora);
+
+//echo $time = date("m/d/Y h:i:s A T",$fecha_entrada);
+//echo 'La hora actual es ';
+//echo $time = date("m/d/Y h:i:s A T",$fecha_actual);
+
+if ($fechaActual == $fecha_appoinment){
+   // echo "El dia es Igual";
+        if ($fecha_actual < $fecha_entrada ) {
+//echo "Dentro del Rango Horario.";
+            $rango_horario = 1;
+        } else {
+//echo "Fuera del Rango Horario";
+            $rango_horario = 0;
+            echo '<script type="text/javascript">
+                        
+            window.location.assign("alertas.php?act=update");
+            </script>';
+        }
+
+} else {
+   // echo "El dia es Diferente";
+        
+}
+
 
 
 
@@ -69,7 +116,16 @@ if ($eldia == 'Saturday') {
 
 if ($eldia == 'Sunday') {
    // echo 'Es el numero 7';
+
+
     $elnumero = 7;
+ 
+
+    echo '<script type="text/javascript">
+				  
+    window.location.assign("alertas.php?act=delete");
+    </script>';
+    
 }
 
 $hola = 0;

@@ -67,7 +67,13 @@
 							$_SESSION['username_barbershop_Xw211qAAsq4'] = $username;
 							$_SESSION['password_barbershop_Xw211qAAsq4'] = $password;
 							$_SESSION['admin_id_barbershop_Xw211qAAsq4'] = $row['admin_id'];
-							header('Location: index.php');
+
+							//header('Location: index.php');
+
+							echo '<script type="text/javascript">
+				  
+							window.location.assign("index.php");
+							</script>';
 							die();
 						}
 						else

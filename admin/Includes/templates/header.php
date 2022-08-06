@@ -111,6 +111,12 @@
 		  				<span>Horarios Atencion</span>
 		  			</a>
 	  			</li>
+				  <li class="nav-item">
+					<a class="nav-link" href="service-reserva.php">
+		  				<i class="fas fa-atom"></i>
+		  				<span>Configuracion Reserva</span>
+		  			</a>
+	  			</li>
 	  
 	  			<!-- Divider -->
 	  			<hr class="sidebar-divider d-none d-md-block">
