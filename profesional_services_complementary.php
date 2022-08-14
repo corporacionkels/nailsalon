@@ -264,7 +264,8 @@ if ($eldia== 'Sunday'){
 
 						foreach ($rows as $row) {
 
-							$query_id = mysqli_query($conexion, "SELECT * FROM `appointments` WHERE `employee_id` = '$row[employee_id]' and `start_time` = '$lafecha'")
+							//$query_id = mysqli_query($conexion, "SELECT * FROM `appointments` WHERE `employee_id` = '$row[employee_id]' and `start_time` = '$lafecha'")
+							$query_id = mysqli_query($conexion, "SELECT * FROM appointments WHERE `employee_id` = '$row[employee_id]' and '$lafecha' BETWEEN `start_time` AND `end_time_expected`;")
 								or die('Error : ' . mysqli_error($conexion));
 						
 							$count = mysqli_num_rows($query_id);

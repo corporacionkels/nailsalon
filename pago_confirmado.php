@@ -11,6 +11,12 @@ $query = mysqli_query($conexion, "DELETE FROM tempory_complementary")
 $appointment_date = date('Y-m-d');
 //echo $appointment_date;
 
+$id = $_GET["id"];
+
+$query = mysqli_query($conexion, "UPDATE appointments SET  reserva = '1'
+WHERE appointment_id = '$id'")
+or die('error: '.mysqli_error($conexion));
+
 ?>
 <!doctype html>
 <html>
@@ -168,7 +174,7 @@ $appointment_date = date('Y-m-d');
                                 </div>
                             </div>
                             <div class="d-grid">
-                                <a href="#" class="btn btn-primary btn-block">Retornar</a>
+                                <a href="categorias.php" class="btn btn-primary btn-block">Retornar</a>
                             </div>
                             
                         </form>

@@ -10,7 +10,7 @@ $query = mysqli_query($conexion, "DELETE FROM tempory_complementary")
 
 $appointment_date = date('Y-m-d');
 //echo $appointment_date;
-
+$id = $_GET["id"];
 ?>
 <!doctype html>
 <html>
@@ -169,7 +169,7 @@ $appointment_date = date('Y-m-d');
                                 </div>
                             </div>
                             <div class="d-grid">
-                                <a href="#" class="btn btn-primary btn-block">Retornar</a>
+                                <a href="confirm_page.php?id=<?php echo $id ?>" class="btn btn-primary btn-block">Retornar</a>
                             </div>
                             
                         </form>

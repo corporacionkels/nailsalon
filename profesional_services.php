@@ -32,6 +32,8 @@ $time_appoinment = $data_dateappoinment['time'];
 
 $lafecha =  $fecha_appoinment.' '.$time_appoinment;
 
+//echo $lafecha;
+
 $orgDate = $fecha_appoinment;  
 $newDate = date("d-m-Y", strtotime($orgDate));  
 //echo "New date format is: ".$newDate. "";  
@@ -214,7 +216,9 @@ if ($eldia== 'Sunday'){
 
 						foreach ($rows as $row) {
 
-							$query_id = mysqli_query($conexion, "SELECT * FROM `appointments` WHERE `employee_id` = '$row[employee_id]' and `start_time` = '$lafecha'")
+							//$query_id = mysqli_query($conexion, "SELECT * FROM `appointments` WHERE `employee_id` = '$row[employee_id]' and `start_time` = '$lafecha'")
+							$query_id = mysqli_query($conexion, "SELECT * FROM appointments WHERE `employee_id` = '$row[employee_id]' and '$lafecha' BETWEEN `start_time` AND `end_time_expected`;")
+
 								or die('Error : ' . mysqli_error($conexion));
 						
 							$count = mysqli_num_rows($query_id);

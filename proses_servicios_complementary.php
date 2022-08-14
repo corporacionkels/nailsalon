@@ -26,12 +26,13 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 	$end_time = $data_appoinment['end_time_expected'];
 
 	echo $start_time;
+	$reserva = '1';
 
 	//$query = mysqli_query($conexion, "UPDATE  tempory_appoinments SET complementary_id  = '$selected_services'")
     //or die('error: ' . mysqli_error($conexion));
 
-	$query = mysqli_query($conexion, "INSERT INTO appointments(client_id, employee_id, start_time, end_time_expected )
-				VALUES('$client_id','$selected_employee','$start_time','$end_time')")
+	$query = mysqli_query($conexion, "INSERT INTO appointments(client_id, employee_id, start_time, end_time_expected,reserva)
+				VALUES('$client_id','$selected_employee','$start_time','$end_time' ,'$reserva')")
 		or die('error: ' . mysqli_error($conexion));
 
 	$query = mysqli_query($conexion, "SELECT MAX(appointment_id) AS id FROM appointments")

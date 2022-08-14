@@ -154,6 +154,7 @@
                                                     where start_time >= ?
                                                     and a.client_id = c.client_id
                                                     and canceled = 0
+                                                    and reserva = 1
                                                     order by start_time;
                                                     ");
                                     $stmt->execute(array(date('Y-m-d H:i:s')));
@@ -307,6 +308,7 @@
                                 $stmt = $con->prepare("SELECT * 
                                                 FROM appointments a , clients c
                                                 where a.client_id = c.client_id
+                                                and a.reserva = 1
                                                 order by start_time;
                                                 ");
                                 $stmt->execute(array());

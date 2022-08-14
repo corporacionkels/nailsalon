@@ -25,13 +25,21 @@
 
     $appointment_id = $data_appoinment['appoinments_id'];
 
+    $appoinment_next = $appointment_id + 1;
+
     //echo $appointment_id;
 
     $query = mysqli_query($conexion,  "DELETE FROM appointments WHERE appointment_id='$appointment_id'")
         or die('error: ' . mysqli_error($conexion));
 
     $query = mysqli_query($conexion,  "DELETE FROM services_booked WHERE appointment_id='$appointment_id'")
-        or die('error: ' . mysqli_error($conexion));     
+        or die('error: ' . mysqli_error($conexion));   
+        
+    $query = mysqli_query($conexion,  "DELETE FROM appointments WHERE appointment_id='$appoinment_next'")
+        or die('error: ' . mysqli_error($conexion));
+
+    $query = mysqli_query($conexion,  "DELETE FROM services_booked WHERE appointment_id='$appoinment_next'")
+        or die('error: ' . mysqli_error($conexion));        
     
 
 

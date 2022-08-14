@@ -295,9 +295,7 @@
 									</tbody>
 
 								</table>
-								<button type="button" class="btn btn-success btn-lg btn-block">
-									Procesar Pago Reserva <span class="glyphicon glyphicon-chevron-right"></span>
-								</button></td>
+								<a class="btn btn-success btn-lg btn-block" href="loading_pages.php?id=<?php echo $appointment_id ?>" role="button">Procesar Pago Reserva</a>
 
 								<a href="cancel_appoinments_low.php?id=<?php echo $appointment_id ?>" class="btn btn-danger btn-lg btn-block" role="button" aria-pressed="true">Cancelar</a>
 								</div>
