@@ -60,7 +60,7 @@
 
 	  			<!-- Heading -->
 	  			<div class="sidebar-heading">
-					SERVICES & SAMPLES
+					SERVICIOS
 	  			</div>
 
 	  			<!-- Nav Item - Pages Collapse Menu -->
@@ -76,12 +76,7 @@
 		  				<span>Servicios</span>
 		  			</a>
 	  			</li>
-	  			<li class="nav-item">
-					<a class="nav-link" href="#">
-		  				<i class="far fa-image"></i>
-		  				<span>Samples</span>
-		  			</a>
-	  			</li>
+
 			  	
 
 	  			<!-- Divider -->
@@ -89,7 +84,7 @@
 
 	  			<!-- Heading -->
 	  			<div class="sidebar-heading">
-					CLIENTS & STAFF
+				
 	  			</div>
 
 	  			<!-- Nav Item - Charts -->
@@ -115,6 +110,13 @@
 					<a class="nav-link" href="service-reserva.php">
 		  				<i class="fas fa-atom"></i>
 		  				<span>Configuracion Reserva</span>
+		  			</a>
+	  			</li>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="config_agendamientos.php">
+		  				<i class="fas fa-atom"></i>
+		  				<span>Configuracion de Agendamientos</span>
 		  			</a>
 	  			</li>
 	  
@@ -148,7 +150,7 @@
 							<li class="nav-item">
 		              			<a class="nav-link" href="../" target="_blank">
 		              				<i class="far fa-eye"></i>
-		                			<span style="margin-left: 5px;">Landing Page</span>
+		                			<span style="margin-left: 5px;">Espacio Teodora</span>
 		              			</a>
 		          			</li>
 							<div class="topbar-divider d-none d-sm-block"></div>
@@ -164,18 +166,7 @@
 							  	
 							  	<!-- Dropdown - User Information -->
 							  	<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-									<a class="dropdown-item" href="#">
-								  		<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-								  		Perfil
-									</a>
-									<a class="dropdown-item" href="#">
-								  		<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-								  		Configuracion
-									</a>
-									<a class="dropdown-item" href="#">
-								  		<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-								  		Actividad
-									</a>
+									
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
 								  		<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

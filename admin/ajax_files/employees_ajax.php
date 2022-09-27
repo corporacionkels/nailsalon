@@ -12,5 +12,7 @@
         $stmt = $con->prepare("DELETE from employees where employee_id = ?");
         $stmt->execute(array($employee_id));    
 	}
+
+	
 	
 ?>

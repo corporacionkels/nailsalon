@@ -166,7 +166,7 @@ or die('error: '.mysqli_error($conexion));
 
                             </div>
                             <div class="text-center">
-                                <img src="https://espiritismo.es/wp-content/uploads/2019/07/felicidades-tu-pago-ha-sido-realizado-con-éxito.png" class="rounded" alt="..." width="600" height="600">
+                                <img src="https://espiritismo.es/wp-content/uploads/2019/07/felicidades-tu-pago-ha-sido-realizado-con-éxito.png" class="rounded" alt="..." width="300" height="300">
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col">

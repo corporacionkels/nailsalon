@@ -52,10 +52,10 @@ $query = mysqli_query($conexion, "INSERT INTO tempory_appoinments(appoinments_id
 })
 .then((willDelete) => {
     if (willDelete) {
-           window.location = "profesional_services_complementary_rand.php";
+           window.location = "profesional_services_complementary_rand.php?id=<?php echo $appointment_id; ?>&service=<?php echo $selected_services; ?>";
     } else {
         
-           window.location = "profesional_services_complementary.php";
+           window.location = "profesional_services_complementary.php?id=<?php echo $appointment_id; ?>&service=<?php echo $selected_services; ?>";
 
     }
 });

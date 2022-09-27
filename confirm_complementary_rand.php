@@ -15,9 +15,11 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 
 	$selected_services = $_POST['selected_services'];
 
- 
 
+   if(isset($_POST['selected_services_child']) ){
     $selected_services_child = $_POST['selected_services_child'];
+
+   }
 
 
 	$servicio_complementario = $_POST['servicio_complementario'];
@@ -25,6 +27,8 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 	// Selected EMPLOYEE
 
 	$selected_employee = $_POST['selected_employee'];
+
+	
 
 	// Selected DATE+TIME
 
@@ -39,7 +43,7 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 
 	$client_first_name = $_POST['client_first_name'];
 	$client_last_name = $_POST['client_last_name'];
-	$client_phone_number = $_POST['client_phone_number'];
+	$client_phone_number = $_POST['client_phone_numbers'];
 	$client_email = $_POST['client_email'];
 
 	
@@ -87,21 +91,27 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 			or die('error: ' . mysqli_error($conexion));
 	}
 
-	foreach ( $selected_services_child as $service_child) {
+	if (isset($_POST['selected_services_child'])) {
+		foreach ($selected_services_child as $service_child) {
 
-		$query = mysqli_query($conexion, "INSERT INTO services_booked(appointment_id, service_id,employed_id)
+			$query = mysqli_query($conexion, "INSERT INTO services_booked(appointment_id, service_id,employed_id)
 					VALUES('$appointment_id','$service_child','$selected_employee')")
 			or die('error: ' . mysqli_error($conexion));
+		}
 	}
 
 	$query = mysqli_query($conexion, "INSERT INTO tempory_complementary(appoinments_id,clients_id,complementary_id)
-					VALUES('$appointment_id','$client_id','12')")
+					VALUES('$appointment_id','$client_id','$servicio_complementario')")
 			or die('error: ' . mysqli_error($conexion));
 
 }
 
 
 ?>
+<?php
+if($servicio_complementario>0){
+?>
+
   <script type="text/javascript">
 	swal({
     title: "Deseas un Servicio Complementario?",
@@ -112,11 +122,19 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 })
 .then((willDelete) => {
     if (willDelete) {
-           window.location = "loading_complementary.php";
+           window.location = "loading_complementary.php?id=<?php echo $appointment_id ?>";
     } else {
         
-           window.location = "confirm_page_next.php";
+           window.location = "confirm_page_next.php?id=<?php echo $appointment_id ?>";
 
     }
 });
 </script>
+<?php
+}else{
+	echo '<script type="text/javascript">
+				  
+	window.location.assign("confirm_page_next.php?id='.$appointment_id.'");
+	</script>';
+}
+?>

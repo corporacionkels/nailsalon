@@ -13,14 +13,21 @@ include "Includes/functions/functions.php";
 include "Includes/templates/header.php";
 require 'config/conexion.php';
 //include "Includes/templates/navbar.php";
-$query = mysqli_query($conexion, "SELECT * FROM   tempory_appoinments")
+
+$appoinment_id = $_GET['id'];
+
+echo $appoinment_id;
+
+$query = mysqli_query($conexion, "SELECT * FROM services_booked as a inner join services as b on a.service_id=b.service_id inner join service_categories as c on b.category_id=c.category_id WHERE a.appointment_id = '$appoinment_id'")
 	or die('error: ' . mysqli_error($conexion));
 
 $data_appoinment = mysqli_fetch_assoc($query);
 
 $service_id = $data_appoinment['complementary_id'];
 
-$appoinment_id = $data_appoinment['appoinments_id'];
+//$appoinment_id = $data_appoinment['appoinments_id'];
+
+echo $service_id;
 
 
 $query = mysqli_query($conexion, "SELECT * FROM  appointments where appointment_id ='$appoinment_id'")
@@ -130,7 +137,7 @@ foreach ($rows as $row) {
            window.location = "javascript:history.back()";
     } else {
         
-           window.location = "confirm_page_next.php";
+           window.location = "confirm_page_next.php?id=<?php echo $appointment_id ?>";
 
     }
 });
@@ -148,7 +155,7 @@ foreach ($rows as $row) {
 
         echo '<script type="text/javascript">
 				  
-        window.location.assign("select_complementary.php");
+        window.location.assign("select_complementary.php?id='.$appoinment_id.'");
         </script>';
 
     }

@@ -28,7 +28,7 @@ if (isset($_POST['submit_book_appointment_form']) && $_SERVER['REQUEST_METHOD'] 
 
 	$client_first_name = $_POST['client_first_name'];
 	$client_last_name = $_POST['client_last_name'];
-	$client_phone_number = $_POST['client_phone_number'];
+	$client_phone_number = $_POST['client_phone_numbers'];
 	$client_email = $_POST['client_email'];
 
 

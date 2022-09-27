@@ -48,14 +48,18 @@
 					{
 						$username = test_input($_POST['username']);
 						$password = test_input($_POST['password']);
-						$hashedPass = sha1($password);
+
+						$hashedPass = hash("SHA256",$password);
+						//$hashedPass = sha1($password);
+
+						//echo $hashedPass;
 
 						//Check if User Exist In database
 
-					//	$stmt = $con->prepare("Select admin_id, username,password from barber_admin where username = ? and password = ?");
-						$stmt = $con->prepare("Select admin_id, username,password from barber_admin where username = ?");
+						$stmt = $con->prepare("Select admin_id, username,password from barber_admin where username = ? and password = ?");
+					//	$stmt = $con->prepare("Select admin_id, username,password from barber_admin where username = ?");
 						//$stmt->execute(array($username,$hashedPass));
-						$stmt->execute(array($username));
+						$stmt->execute(array($username,$hashedPass));
 						$row = $stmt->fetch();
 						$count = $stmt->rowCount();
 

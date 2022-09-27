@@ -147,64 +147,66 @@ $appointment_date = date('Y-m-d');
                     <div class="card-body show  ">
                         <div class="row">
                             <div class="col">
-                                <h5><b>Bienvenido</b></h5>
+                                <h5><b>Reservas Espacio Teodora</b></h5>
                                 <p> Que Servicio Desea Agendar ? <span class=" ml-1 cursor-pointer"> Seleccione </span> </p>
                             </div>
                         </div>
                         <form id="form" name="login-form" method="POST" action="loading_services.php">
                             <div class="radio-group row justify-content-between px-3 text-center a">
+
+
+                            <?php
+
+                            $no = 1;
+
+                                $query = mysqli_query($conexion, "SELECT * from service_categories where category_id<>'13'")
+                                or die('error: '.mysqli_error($conexion));
+
+                                while ($data = mysqli_fetch_assoc($query)) { 
+
+                             if($no ==1 )  { 
+                            ?>
+
                                 <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
                                     <div class="flex-row">
                                         <div class="col">
-                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://aprende.com/wp-content/uploads/2020/09/preparate-para-aumentar-tus-ingresos-salida-laboral-en-manicure--940x580.jpg" width="300" height="300"> </div>
+                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://www.espacioteodora.cl/agendas/imagenes/<?php echo $data['foto']; ?>" width="300" height="300"> </div>
                                             <p></p>
                                         </div>
-                                        <input type="radio" name="radios" id="radio1" value='11' class="invisible-radio">
+                                        <input type="radio" name="radios" id="radio1" value='<?php echo $data['category_id']; ?>' class="invisible-radio" checked>
                                         <label for="radio1">
-                                            Manicure
+                                        <?php echo $data['category_name']; ?>
                                             <div class="styled-radio red" data-text="Logo 1"></div>
                                         </label>
                                     </div>
                                 </div>
+                            <?php
+                             } //Llave de la condicion if de la variable de session
+
+                             else
+                             {
+                            ?>  
                                 <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
                                     <div class="flex-row">
                                         <div class="col">
-                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://diseñosuñas.com/wp-content/uploads/2021/03/pedicura-disenos-02.jpg" width="300" height="300"> </div>
+                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://www.espacioteodora.cl/agendas/imagenes/<?php echo $data['foto']; ?>" width="300" height="300"> </div>
                                             <p></p>
-                                            <input type="radio" name="radios" id="radio2" value='12' class="invisible-radio">
-                                            <label for="radio2">
-                                                Pedicure
-                                                <div class="styled-radio green" data-text="Logo 2"></div>
-                                            </label>
                                         </div>
+                                        <input type="radio" name="radios" id="radio1" value='<?php echo $data['category_id']; ?>' class="invisible-radio">
+                                        <label for="radio1">
+                                        <?php echo $data['category_name']; ?>
+                                            <div class="styled-radio red" data-text="Logo 1"></div>
+                                        </label>
                                     </div>
                                 </div>
-                                <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
-                                    <div class="flex-row">
-                                        <div class="col">
-                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://www.cimformacion.com/blog/wp-content/uploads/2017/01/limpieza-facial-min.jpg" width="300" height="300"> </div>
-                                            <p></p>
-                                            <input type="radio" name="radios" id="radio3" value='14' class="invisible-radio">
-                                            <label for="radio3">
-                                                Faciales
-                                                <div class="styled-radio blue" data-text="Logo 3"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto ml-sm-2 mx-1 card-block  py-0 text-center radio  ">
-                                    <div class="flex-row">
-                                        <div class="col">
-                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://belessaesthetic.com/wp-content/uploads/2019/10/masajes-en-zaragoza.jpg" width="300" height="300"> </div>
-                                            <p></p>
-                                            <input type="radio" name="radios" id="radio4" value='15' class="invisible-radio" checked>
-                                            <label for="radio4">
-                                                Corporales
-                                                <div class="styled-radio blue" data-text="Logo 3"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+
+                             <?php  
+                             }
+                           
+                             $no++;
+                             }
+                            ?>    
+                              
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col">
@@ -226,14 +228,11 @@ $appointment_date = date('Y-m-d');
                        
                                     <option value="11:30">11:30 AM</option>
                                     <option value="13:00">01:00 PM</option>
-                                    <option value="14:30">02:30 PM</option>
+                                    <option value="14:30">03:30 PM</option>
                                     
-                                    <option value="15:30">03:30 PM</option>
-                                    <option value="17:00">05:00 PM</option>
+                                    <option value="15:30">05:00 PM</option>
+                                    <option value="17:00">06:30 PM</option>
                                     
-                                    <option value="18:30">06:30 PM</option>
-                                    
-                                    <option value="20:00">08:00 PM</option>
                                     
                                 </select>
                                 <div class="col-auto">

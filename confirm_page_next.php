@@ -9,17 +9,22 @@
 	//include "Includes/templates/navbar.php";
 
 
+	$appointment_id = $_GET['id'];
+
+
     $query = mysqli_query($conexion, "SELECT * from  tempory_appoinments")
     or die('error: ' . mysqli_error($conexion));
 
     $data_appoinment = mysqli_fetch_assoc($query);
 
-    $appointment_id = $data_appoinment['appoinments_id'];
+    //$appointment_id = $data_appoinment['appoinments_id'];
 
 
 	$child_id = $data_appoinment['child_id'];
 
     $service_id = $data_appoinment['services_id'];
+
+	
 
 
 	?>
@@ -295,7 +300,7 @@
 									</tbody>
 
 								</table>
-								<a class="btn btn-success btn-lg btn-block" href="loading_pages.php?id=<?php echo $appointment_id ?>" role="button">Procesar Pago Reserva</a>
+								<a class="btn btn-success btn-lg btn-block" href="mail.php?id=<?php echo $appointment_id ?>" role="button">Procesar Pago Reserva</a>
 
 								<a href="cancel_appoinments_low.php?id=<?php echo $appointment_id ?>" class="btn btn-danger btn-lg btn-block" role="button" aria-pressed="true">Cancelar</a>
 								</div>

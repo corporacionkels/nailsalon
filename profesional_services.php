@@ -8,15 +8,21 @@ include "Includes/templates/header.php";
 require 'config/conexion.php';
 //include "Includes/templates/navbar.php";
 
-//$radio_value = $_POST["radios"];
+$service_id = $_GET["service"];
 //echo $radio_value;
 
-$query = mysqli_query($conexion, "SELECT * FROM tempory_appoinments")
-	or die('error: ' . mysqli_error($conexion));
+//$query = mysqli_query($conexion, "SELECT * FROM tempory_appoinments as a inner join services as b on a.services_id=b.service_id /////inner join service_categories as c on c.category_id=b.category_id")
+//	or die('error: ' . mysqli_error($conexion));
+
+$query = mysqli_query($conexion, "SELECT * FROM services as a inner join service_categories as b on a.category_id=b.category_id WHERE a.service_id = '$service_id'")
+or die('error: ' . mysqli_error($conexion));
+
 
 $data_appoinment = mysqli_fetch_assoc($query);
 
-$service_id = $data_appoinment['services_id'];
+//$service_id = $data_appoinment['services_id'];
+
+$service_complementary = $data_appoinment['complementary_id'];
 
 
 
@@ -121,7 +127,7 @@ if ($eldia== 'Sunday'){
 
 		<!-- RESERVATION FORM -->
 
-		<form method="post" id="appointment_form" action="proses_servicios.php">
+		<form method="post" id="appointment_form" action="confirm_complementary_rand.php">
 
 			<!-- SELECT SERVICE -->
 
@@ -321,11 +327,13 @@ if ($eldia== 'Sunday'){
 							<span class="invalid-feedback">Correo Invalido</span>
 						</div>
 						<div class="col-sm-6">
-							<input type="text" name="client_phone_number" id="client_phone_number" class="form-control" placeholder="Phone number">
+							<input type="hidden" name="client_phone_number" value ="7865387629" id="client_phone_number" maxlength="12" class="form-control" placeholder="Phone number">
 							<span class="invalid-feedback">Numero Telefono Invalido</span>
+							<input type="text" name="client_phone_numbers" maxlength="12" class="form-control" placeholder="Phone number">
+						
 						</div>
 						<div class="col-sm-6" style="display:none;">
-							<input type="text" name="servicio_complementario"  value="<?php echo $radio_value ?>" class="form-control" placeholder="Phone number">
+							<input type="text" name="servicio_complementario"  value="<?php echo $service_complementary ?>" class="form-control" placeholder="Phone number">
 							<span class="invalid-feedback">Para el Servicio Complementario</span>
 						</div>
 					</div>

@@ -39,7 +39,7 @@
 
                     </span>
 
-                    <a class="btn btn-success btn-lg btn-block" href="pago_confirmado.php?id=<?php echo $radio_value ?>" role="button">Pago Confirmado</a>
+                    <a class="btn btn-success btn-lg btn-block" href="mail.php?id=<?php echo $radio_value ?>" role="button">Pago Confirmado</a>
                     <a href="pago_fallido.php?id=<?php echo $radio_value ?>" class="btn btn-danger btn-lg btn-block" role="button" aria-pressed="true">Pago Rechazado</a>
                 </div>
             </div>

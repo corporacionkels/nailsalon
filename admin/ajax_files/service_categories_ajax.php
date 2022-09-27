@@ -39,32 +39,27 @@
         {
             $con->beginTransaction();
 
-            $stmt_services = $con->prepare("select service_id from services where category_id = ?");
+            $stmt_services = $con->prepare("SELECT * FROM services_booked as a inner join services as b on b.service_id=a.service_id where b.category_id = ?");
             $stmt_services->execute(array($category_id));
             $services = $stmt_services->fetchAll();
             $services_count = $stmt_services->rowCount();
 
             if($services_count > 0)
             {
-                $stmt_service_uncategorized = $con->prepare("select category_id from service_categories where LOWER(category_name) = ?");
-                $stmt_service_uncategorized->execute(array("uncategorized"));
-                $uncategorized_id = $stmt_service_uncategorized->fetch();
-
-                foreach($services as $service)
-                {
-                    $stmt_update_service = $con->prepare("UPDATE services set category_id = ? where service_id = ?");
-                    $stmt_update_service->execute(array($uncategorized_id["category_id"], $service["service_id"]));
-                }
-            }
+                $data['alert'] = "Warning";
+                $data['message'] = "No se puede Eliminar hay Transacciones !";
+                echo json_encode($data);
+                exit();
+            }else{
 
             $stmt = $con->prepare("DELETE from service_categories where category_id = ?");
             $stmt->execute(array($category_id));
             $con->commit();
             $data['alert'] = "Success";
-            $data['message'] = "La nueva categoría ha sido insertada con éxito !";
+            $data['message'] = "Categoría ha sido Eliminada con éxito !";
             echo json_encode($data);
             exit();
-
+            }
             
         }
         catch(Exception $exp)
@@ -83,6 +78,7 @@
 	{
         $category_id = $_POST['category_id'];
         $category_name = test_input($_POST['category_name']);
+      
 
         $checkItem = checkItem("category_name","service_categories",$category_name);
 

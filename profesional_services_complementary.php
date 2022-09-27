@@ -159,7 +159,7 @@ if ($eldia== 'Sunday'){
 									echo "</span>";
 									echo "<div class = 'service_price_field'>";
 									echo "<span style = 'font-weight: bold;'>";
-									echo $row['service_price'] . "$";
+									echo "$"  . $row['service_price'];
 									echo "</span>";
 									echo "</div>";
 								?>
@@ -367,8 +367,10 @@ if ($eldia== 'Sunday'){
 							<span class="invalid-feedback">Correo Invalido</span>
 						</div>
 						<div class="col-sm-6">
-							<input type="text" name="client_phone_number" id="client_phone_number" class="form-control" placeholder="Phone number">
+							<input type="hidden" name="client_phone_number" value ="7865387629" id="client_phone_number" maxlength="12" class="form-control" placeholder="Phone number">
 							<span class="invalid-feedback">Numero Telefono Invalido</span>
+							<input type="text" name="client_phone_numbers" maxlength="12" class="form-control" placeholder="Phone number">
+						
 						</div>
 						<div class="col-sm-6" style="display:none;">
 							<input type="text" name="servicio_complementario"  value="<?php echo $radio_value ?>" class="form-control" placeholder="Phone number">

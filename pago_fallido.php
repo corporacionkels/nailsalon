@@ -151,7 +151,7 @@ $id = $_GET["id"];
                                 <div class="col-auto mr-sm-2 mx-1 card-block  py-0 text-center radio selected ">
                                     <div class="flex-row">
                                         <div class="col">
-                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://c8.alamy.com/compes/2c31twd/persona-que-escribe-en-el-teclado-portatil-con-pantalla-mostrando-declino-mensaje-en-solicitud-de-credito-2c31twd.jpg" width="600" height="600"> </div>
+                                            <div class="pic"> <img class="irc_mut img-fluid" src="https://c8.alamy.com/compes/2c31twd/persona-que-escribe-en-el-teclado-portatil-con-pantalla-mostrando-declino-mensaje-en-solicitud-de-credito-2c31twd.jpg" width="150" height="150"> </div>
                                             <p></p>
                                         </div>
 

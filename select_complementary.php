@@ -11,14 +11,17 @@ require 'config/conexion.php';
 //$radio_value = $_POST["radios"];
 //echo $radio_value;
 
-$query = mysqli_query($conexion, "SELECT * FROM  tempory_complementary")
+$appoinment_id = $_GET['id'];
+
+echo $appoinment_id;
+
+$query = mysqli_query($conexion, "SELECT * FROM services_booked as a inner join services as b on a.service_id=b.service_id inner join service_categories as c on b.category_id=c.category_id WHERE a.appointment_id = '$appoinment_id'")
 	or die('error: ' . mysqli_error($conexion));
 
 $data_appoinment = mysqli_fetch_assoc($query);
-
 $complementary_id = $data_appoinment['complementary_id'];
 
-$appoinment_id = $data_appoinment['appoinments_id'];
+//$appoinment_id = $data_appoinment['appoinments_id'];
 
 //echo $category_name;
 

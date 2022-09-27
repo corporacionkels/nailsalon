@@ -14,6 +14,66 @@ include "Includes/templates/header.php";
 require 'config/conexion.php';
 //include "Includes/templates/navbar.php";
 
+
+// Chequeo de Servicios Existentes//
+
+$query_id = mysqli_query($conexion, "SELECT * FROM `services`")
+or die('Error : ' . mysqli_error($conexion));
+
+$count = mysqli_num_rows($query_id);
+
+echo $count;
+
+if ($count == 0) {
+
+    echo '<script type="text/javascript">
+                        
+    window.location.assign("loading_services_fail.php");
+    </script>';
+   
+}
+
+
+
+$query_id = mysqli_query($conexion, "SELECT * FROM `employees`")
+or die('Error : ' . mysqli_error($conexion));
+
+$count = mysqli_num_rows($query_id);
+
+echo $count;
+
+if ($count == 0) {
+
+    echo '<script type="text/javascript">
+                        
+    window.location.assign("loading_services_fail.php");
+    </script>';
+   
+}
+
+
+
+$query_id = mysqli_query($conexion, "SELECT * FROM `employees_schedule`")
+or die('Error : ' . mysqli_error($conexion));
+
+$count = mysqli_num_rows($query_id);
+
+echo $count;
+
+if ($count == 0) {
+
+    echo '<script type="text/javascript">
+                        
+    window.location.assign("loading_services_fail.php");
+    </script>';
+   
+}
+
+
+
+//
+
+
 $radio_value = $_POST["radios"];
 
 $fecha_appoinment = $_POST["birthday"];
@@ -28,6 +88,8 @@ $lafecha =  $fecha_appoinment.' '.$time_appoinment;
 //echo 'La Fecha Actual ';
 $fechaActual = date('Y-m-d');
    
+//echo 'El radio es ';
+//echo $radio_value;
 //echo $fechaActual;
 //echo ' Hora de la Cita';
 //echo $time_appoinment;

@@ -9,6 +9,8 @@
     include 'Includes/functions/functions.php'; 
     include 'Includes/templates/header.php';
 
+    $No = 0;
+
     //Check If user is already logged in
     if(isset($_SESSION['username_barbershop_Xw211qAAsq4']) && isset($_SESSION['password_barbershop_Xw211qAAsq4']))
     {
@@ -19,10 +21,7 @@
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Categoria Servicios</h1>
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                    <i class="fas fa-download fa-sm text-white-50"></i>
-                    Generate Report
-                </a>
+               
             </div>
 
             <!-- Service Categories Table -->
@@ -77,6 +76,7 @@
                                 <tr>
                                     <th>Categoria ID</th>
                                     <th>Nombre Categoria</th>
+                                    <th class="center">Foto</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead> 
@@ -84,14 +84,23 @@
                                 <?php
                                 foreach($rows_categories as $category)
                                 {
+                                    $No = $No +1;
                                     echo "<tr>";
                                         echo "<td>";
-                                            echo $category['category_id'];
+                                            echo $No;
                                         echo "</td>";
                                         echo "<td>";
                                             echo $category['category_name'];
+                                        
+                                            if ($category['foto']=="") { ?>
+                                                <td class='center'><img class='img-user' src='images/jugador/user-default.png' width='45'></td>
+                                              <?php
+                                              } else { ?>
+                                                <td class='center'><img class='img-user' src='https://www.espacioteodora.cl/agendas/imagenes/<?php echo $category['foto']; ?>' width='150' ></td>
+                                              <?php
+                                              }
                                         echo "</td>";
-                                        echo "<td>";
+                                        echo "<td  width='50' class='center'>";
                                             if(strtolower($category["category_name"]) != "uncategorized")
                                             {
                                                 $delete_data = "delete_".$category["category_id"];
@@ -99,7 +108,8 @@
                                             ?>
                                             <!-- DELETE & EDIT BUTTONS -->
                                             <ul>
-                                                <li class="list-inline-item" data-toggle="tooltip" title="Edit">
+                                                
+                                                <li class="list-inline-item" data-toggle="tooltip" title="Editar Categoria">
                                                     <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="modal" data-target="#<?php echo $edit_data; ?>" data-placement="top"><i class="fa fa-edit"></i></button>
 
                                                     <!-- EDIT Modal -->
@@ -129,10 +139,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    
                                                 </li>
                                                 <!---->
-                                                <li class="list-inline-item" data-toggle="tooltip" title="Delete">
-                                                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="modal" data-target="#<?php echo $delete_data; ?>" data-placement="top"><i class="fa fa-trash"></i></button>
+                                                <!--
+                                                <li class="list-inline-item" data-toggle="tooltip" title="Borrar Categoria">
+                                                    <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="modal" data-target="#<?php echo $delete_data; ?>" data-placement="top"><i class="fa fa-trash"></i></button>-->
 
                                                     <!-- Delete Modal -->
 
@@ -156,6 +169,42 @@
                                                         </div>
                                                     </div>
                                                 </li>
+                                                <li class="list-inline-item" data-toggle="tooltip" title="Agregar Imagen">
+                                                <form action="ajax_files/update_image_category.php" enctype="multipart/form-data" method="POST">
+
+                                                    <div class="upload-img">
+														<div class="change-photo-btn">
+															<span><i class="fa fa-upload"></i> Cargar Nueva Foto</span>
+															<input type="file" class="upload" name="imagen">
+														</div>
+														<small class="form-text text-muted">Permitido JPG, GIF o PNG. Tamaño máximo de 2 MB</small>
+                                                        <input type="hidden" name="id_user" value="<?php echo $category['category_id']; ?>">
+                                                    <button type="submit" class="btn btn-info btn-sm rounded-0"><i class="fa fa-camera"></i>Subir Imagen</button>
+													</div>
+                                                </form>
+                                                    <!-- Delete Modal -->
+
+                                                    <div class="modal fade" id="<?php echo $delete_data; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $delete_data; ?>" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Categoria</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Esta Seguro de Eliminar esta Categoria "<?php echo $category['category_name']; ?>"?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                    <button type="button" data-id = "<?php echo $category['category_id']; ?>" class="btn btn-danger delete_category_bttn">Eliminar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                
                                             </ul>
                                             <?php
                                             }
