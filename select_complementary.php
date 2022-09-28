@@ -131,6 +131,7 @@ $complementary_id = $data_appoinment['complementary_id'];
 			<div style="overflow:auto;padding: 30px 0px;">
 				<div style="float:right;">
 				<input type="hidden" name="submit_book_appointment_form">
+				<input type="hidden" value="<?php echo $appoinment_id?>" name="appoinment_id">
                     <input class="next_prev_buttons" type="submit" value="Siguiente">
 				</div>
 				<a href="categorias.php" class="next_prev_buttons" type="submit"  role="button" style="background-color: #bbbbbb;" aria-pressed="true">Retorna Categorias</a>

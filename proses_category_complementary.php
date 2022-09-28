@@ -13,9 +13,14 @@ require 'config/conexion.php';
 
 if (isset($_POST['selected_services']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
+
 // Selected SERVICES
 
+
+
 $selected_services = $_POST['selected_services'];
+
+$appointment_id = $_POST['appoinment_id'];
 
 $query = mysqli_query($conexion, "UPDATE  tempory_appoinments SET complementary_id = '$selected_services'
 ")
@@ -35,7 +40,7 @@ or die('error : ' . mysqli_error($conexion));
 })
 .then((willDelete) => {
     if (willDelete) {
-           window.location = "profesional_services_rand_complementary.php";
+           window.location = "profesional_services_rand_complementary.php?id=<?php echo $appointment_id ?>&complementary_id=<?php echo $selected_services ?>";
     } else {
         
            window.location = "profesional_services_only_complementary.php";

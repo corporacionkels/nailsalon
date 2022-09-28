@@ -7,6 +7,8 @@ session_start();
 require '../../config/conexion.php';
 
 $client_fname = $_POST['client_email'];
+$client_user = $_POST['user_admin'];
+$client_email = $_POST['admin_email'];
 
 $clavehash = hash("SHA256",$client_fname);
 
@@ -16,8 +18,9 @@ $clavehash = hash("SHA256",$client_fname);
 
 
 
-        $query = mysqli_query($conexion, "UPDATE barber_admin SET password = '$clavehash'
-        
+        $query = mysqli_query($conexion, "UPDATE barber_admin SET password = '$clavehash' ,
+
+        username = '$client_user' , email = '$client_email'
             WHERE admin_id 	= '1'")
             or die('error: '.mysqli_error($conexion));
 
