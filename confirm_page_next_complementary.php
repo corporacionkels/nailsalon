@@ -334,7 +334,9 @@
 									</tbody>
 
 								</table>
-								<a class="btn btn-success btn-lg btn-block" href="https://www.flow.cl/app/web/login.php" role="button">Procesar Pago Reserva</a>
+								<a class="btn btn-info btn-lg btn-block" href="mail.php?id=<?php echo $appointment_id ?>" role="button">RESERVAR SIN PAGAR (RESERVA SUJETA A CONFIRMACION)</a>
+								
+								<a class="btn btn-success btn-lg btn-block" href="https://www.flow.cl/btn.php?token=uicgydh" role="button">Reservar con Pago Via Flow</a>
 
 								<a href="cancel_appoinments_complementary.php?id=<?php echo $appointment_id ?>" class="btn btn-danger btn-lg btn-block" role="button" aria-pressed="true">Cancelar</a>
 								</div>
